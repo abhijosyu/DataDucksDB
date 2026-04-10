@@ -8,11 +8,11 @@ import streamlit as st
 # ---- General ----------------------------------------------------------------
 
 def home_nav():
-    st.sidebar.page_link("Home.py", label="Home", icon="🏠")
+    st.sidebar.page_link("Home.py", label="Home", icon="🍽️")
 
 
 def about_page_nav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/30_About.py", label="About", icon="🐤")
 
 
 # ---- Role: pol_strat_advisor ------------------------------------------------
