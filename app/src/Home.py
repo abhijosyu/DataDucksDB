@@ -46,30 +46,30 @@ if st.button("👨 act as Jake, a restaurant reviewer",
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
     # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
+    st.session_state['role'] = 'reviewer'
     # we add the first name of the user (so it can be displayed on
     # subsequent pages).
     st.session_state['first_name'] = 'Jake'
     # finally, we ask streamlit to switch to another page, in this case, the
     # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
+    logger.info("Logging in as Restaurant Reviewer Persona")
     st.switch_page('pages/00_Pol_Strat_Home.py')
 
 if st.button('👩‍🍳 Act as Victoria Hu, a restaurant employee',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker' # fix role
+    st.session_state['role'] = 'employee' 
     st.session_state['first_name'] = 'Victoria'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.switch_page('pages/10_Restaurant_Employee.py')
 
 if st.button('👔 Act as Joe, a restaurant owner',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker' # fix role
+    st.session_state['role'] = 'owner' 
     st.session_state['first_name'] = 'Joe'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.switch_page('pages/22_Restaurant_Owner.py')
 
 if st.button('👨‍💻 Act as Alex, a System Administrator',
              type='primary',
