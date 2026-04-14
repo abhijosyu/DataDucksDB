@@ -12,12 +12,12 @@ SideBarLinks()
 st.title(f"Welcome Restaurant Reviewer, {st.session_state['first_name']}.")
 st.write('### What would you like to do today?')
 
-if st.button('View World Bank Data Visualization',
+if st.button('View Restauraunt List',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/01_World_Bank_Viz.py')
+    st.switch_page('pages/01_Restauraunts_List.py')
 
-if st.button('View World Map Demo',
+if st.button('View Restauraunt Reviews',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/02_Map_Demo.py')
+    st.switch_page('pages/02_Reviewer_Restaurant_Reviews.py')
