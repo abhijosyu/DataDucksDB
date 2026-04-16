@@ -15,34 +15,44 @@ def about_page_nav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🐤")
 
 
-# ---- Role: pol_strat_advisor ------------------------------------------------
+# ---- Role: reviewer ------------------------------------------------
 
-def pol_strat_home_nav():
+def reviewer_home_nav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/00_Reviewer_Home.py", label="Reviewer Home", icon="👤"
     )
 
 
-def world_bank_viz_nav():
+def reviewer_restaurant_list():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Restauraunts_List.py", label="Restauraunts List", icon="📋"
+    )
+
+def reviewer_user_reviews():
+    st.sidebar.page_link(
+        "pages/02_Reviewer_Restaurant_Reviews.py", label="User Reviews", icon="⭐️"
+    )
+
+def reviewer_write_review():
+    st.sidebar.page_link(
+        "pages/03_Reviewer_Write.py", label="User Reviews", icon="⭐️"
     )
 
 
-def map_demo_nav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
 
 
-# ---- Role: usaid_worker -----------------------------------------------------
+# ---- Role: employee -----------------------------------------------------
 
-def usaid_worker_home_nav():
+def employee_restauraunt_reviews():
     st.sidebar.page_link(
-        "pages/10_USAID_Worker_Home.py", label="USAID Worker Home", icon="🏠"
+        "pages/03_Employee_Restaurant_Reviews.py", label="Employee Reviews", icon="⭐️"
     )
 
 
-def ngo_directory_nav():
-    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
+def employee_write_review():
+    st.sidebar.page_link(
+        "pages/04_Employee_Write.py", label="Employee Reviews", icon="⭐️"
+    )
 
 
 def add_ngo_nav():
@@ -98,22 +108,20 @@ def SideBarLinks(show_home=False):
 
     if st.session_state["authenticated"]:
 
-        if st.session_state["role"] == "pol_strat_advisor":
-            pol_strat_home_nav()
-            world_bank_viz_nav()
-            map_demo_nav()
+        if st.session_state["role"] == "reviewer":
+            reviewer_home_nav()
+            reviewer_restaurant_list()
+            reviewer_user_reviews()
+            reviewer_write_review()
 
-        if st.session_state["role"] == "usaid_worker":
-            usaid_worker_home_nav()
-            ngo_directory_nav()
-            add_ngo_nav()
-            prediction_nav()
-            api_test_nav()
-            classification_nav()
+        if st.session_state["role"] == "employee":
+            reviewer_restaurant_list()
+
+        if st.session_state["role"] == "owner":
+            reviewer_home_nav()
 
         if st.session_state["role"] == "administrator":
-            admin_home_nav()
-            ml_model_mgmt_nav()
+            reviewer_home_nav()
 
     # About link appears at the bottom for all roles
     about_page_nav()

@@ -12,27 +12,12 @@ SideBarLinks()
 st.title(f"Welcome Restauraunt Employee, {st.session_state['first_name']}.")
 st.write('### What would you like to do today?')
 
-if st.button('View NGO Directory',
+if st.button('View Restauraunt List',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/14_NGO_Directory.py')
+    st.switch_page('pages/01_Restauraunts_List.py')
 
-if st.button('Add New NGO',
+if st.button('View Restauraunt Employee Reviews',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/15_Add_NGO.py')
-
-if st.button('Predict Value Based on Regression Model',
-             type='primary',
-             use_container_width=True):
-    st.switch_page('pages/11_Prediction.py')
-
-if st.button('View the Simple API Demo',
-             type='primary',
-             use_container_width=True):
-    st.switch_page('pages/12_API_Test.py')
-
-if st.button('View Classification Demo',
-             type='primary',
-             use_container_width=True):
-    st.switch_page('pages/13_Classification.py')
+    st.switch_page('pages/03_Employee_Restaurant_Reviews.py')
