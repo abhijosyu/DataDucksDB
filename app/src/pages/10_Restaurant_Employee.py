@@ -21,3 +21,11 @@ if st.button('View Restauraunt Employee Reviews',
              type='primary',
              use_container_width=True):
     st.switch_page('pages/03_Employee_Restaurant_Reviews.py')
+
+if st.button('Write Employee Review',
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/04_Employee_Write.py')
+
+    if st.button('Write Employee Complaint', type='primary', use_container_width=True):
+        st.switch_page('pages/05_Employee_Complaint.py')

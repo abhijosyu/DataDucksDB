@@ -12,6 +12,5 @@ SideBarLinks()
 
 # set up the page
 st.markdown("# Restaurant Reviews")
-st.sidebar.header("Restaurant Reviews")
 
 

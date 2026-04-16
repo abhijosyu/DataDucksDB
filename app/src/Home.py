@@ -69,7 +69,7 @@ if st.button('👔 Act as Joe, a restaurant owner',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'owner' 
     st.session_state['first_name'] = 'Joe'
-    st.switch_page('pages/22_Restaurant_Owner.py')
+    st.switch_page('pages/11_Owner_Home.py')
 
 if st.button('👨‍💻 Act as Alex, a System Administrator',
              type='primary',
