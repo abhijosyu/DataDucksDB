@@ -11,6 +11,6 @@ st.set_page_config(layout='wide')
 SideBarLinks()
 
 # set up the page
-st.markdown("# Restaurant Reviews")
+st.markdown("# List Of Users")
 
 

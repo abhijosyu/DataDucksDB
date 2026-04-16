@@ -13,8 +13,6 @@ st.set_page_config(layout='wide')
 SideBarLinks()
 
 # set the header of the page
-st.header('List Of Restaurants')
+st.markdown('# List Of Restaurants')
 
-# You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['first_name']}")
 

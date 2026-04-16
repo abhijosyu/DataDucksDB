@@ -9,7 +9,7 @@ st.set_page_config(layout='wide')
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
-st.title(f"Welcome Restaurant Reviewer, {st.session_state['first_name']}.")
+st.title(f"Welcome Restauraunt Employee, {st.session_state['first_name']}.")
 st.write('### What would you like to do today?')
 
 if st.button('View Restauraunt List',
@@ -17,7 +17,15 @@ if st.button('View Restauraunt List',
              use_container_width=True):
     st.switch_page('pages/01_Restauraunts_List.py')
 
-if st.button('View Restauraunt Reviews',
+if st.button('View Restauraunt Employee Reviews',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/02_Reviewer_Restaurant_Reviews.py')
+    st.switch_page('pages/11_Employee_Restaurant_Reviews.py')
+
+if st.button('Write Employee Review',
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/12_Employee_Write.py')
+
+if st.button('Write Employee Complaint', type='primary', use_container_width=True):
+    st.switch_page('pages/13_Employee_Complaint.py')

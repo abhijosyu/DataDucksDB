@@ -61,7 +61,7 @@ if st.button('👩‍🍳 Act as Victoria Hu, a restaurant employee',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'employee' 
     st.session_state['first_name'] = 'Victoria'
-    st.switch_page('pages/10_Restaurant_Employee.py')
+    st.switch_page('pages/10_Employee_Home.py')
 
 if st.button('👔 Act as Joe, a restaurant owner',
              type='primary',
@@ -69,12 +69,12 @@ if st.button('👔 Act as Joe, a restaurant owner',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'owner' 
     st.session_state['first_name'] = 'Joe'
-    st.switch_page('pages/11_Owner_Home.py')
+    st.switch_page('pages/20_Owner_Home.py')
 
 if st.button('👨‍💻 Act as Alex, a System Administrator',
              type='primary',
              use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+    st.session_state['first_name'] = 'Alex'
+    st.switch_page('pages/30_Admin_Home.py')

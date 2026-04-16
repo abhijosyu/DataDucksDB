@@ -12,7 +12,7 @@ def home_nav():
 
 
 def about_page_nav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🐤")
+    st.sidebar.page_link("pages/40_About.py", label="About", icon="🐤")
 
 
 # ---- Role: reviewer ------------------------------------------------
@@ -43,40 +43,48 @@ def reviewer_write_review():
 
 # ---- Role: employee -----------------------------------------------------
 
+def employee_home_nav():
+    st.sidebar.page_link(
+        "pages/10_Employee_Home.py", label="Employee Home", icon="🏠"
+    )
+
 def employee_restauraunt_reviews():
     st.sidebar.page_link(
-        "pages/03_Employee_Restaurant_Reviews.py", label="Employee Reviews", icon="⭐️"
+        "pages/11_Employee_Restaurant_Reviews.py", label="Employee Reviews", icon="⭐️"
     )
 
 
 def employee_write_review():
     st.sidebar.page_link(
-        "pages/04_Employee_Write.py", label="Write Review", icon="✏️"
+        "pages/12_Employee_Write.py", label="Write Review", icon="✏️"
     )
 
 
 def employee_write_complaint():
-    st.sidebar.page_link("pages/05_Employee_Complaint.py", label="Write a Complaint", icon="⚠️")
+    st.sidebar.page_link("pages/13_Employee_Complaint.py", label="Write a Complaint", icon="⚠️")
 
 # ---- Role: company owner ----------------------------------------------------
 
 def owner_home_nav():
-    st.sidebar.page_link("pages/11_Owner_Home.py", label="Owner Home", icon="🏠")
+    st.sidebar.page_link("pages/20_Owner_Home.py", label="Owner Home", icon="🏠")
 
+
+def owner_my_restauraunts():
+    st.sidebar.page_link("pages/24_Owner_Restauraunts.py", label="My Restauraunts", icon="🍽️")
 
 def local_stats():
     st.sidebar.page_link(
-        "pages/12_Restaraunt_Stats.py", label="Local Restaurant Analytics", icon="📊"
+        "pages/21_Restaraunt_Stats.py", label="Local Restaurant Analytics", icon="📊"
     )
 
 def global_stats():
     st.sidebar.page_link(
-        "pages/13_Global_Restaurant_Stats.py", label="Global Restaurant Analytics", icon="🌎"
+        "pages/22_Global_Restaurant_Stats.py", label="Global Restaurant Analytics", icon="🌎"
     )
 
 def local_reviews():
     st.sidebar.page_link(
-        "pages/14_Local_Restaurant_Reviews.py", label="Local Restaurant Reviews", icon="🗒️"
+        "pages/23_Local_Restaurant_Reviews.py", label="Local Restaurant Reviews", icon="🗒️"
     )
 
 
@@ -84,13 +92,18 @@ def local_reviews():
 # ---- Role: administrator ----------------------------------------------------
 
 def admin_home_nav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
+    st.sidebar.page_link("pages/30_Admin_Home.py", label="Admin Home", icon="🏠")
+
+def admin_users_list():
+    st.sidebar.page_link("pages/33_Users_List.py", label="Users List", icon="👤")
+
+def admin_view_complaints():
+    st.sidebar.page_link("pages/32_View_Complaints.py", label="View Complaints", icon="⚠️")
+
+def admin_message_user():
+    st.sidebar.page_link("pages/31_Message_User.py", label="Message User", icon="🧑‍💻")
 
 
-def ml_model_mgmt_nav():
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
 
 
 # ---- Sidebar assembly -------------------------------------------------------
@@ -121,6 +134,7 @@ def SideBarLinks(show_home=False):
             reviewer_write_review()
 
         if st.session_state["role"] == "employee":
+            employee_home_nav()
             reviewer_restaurant_list()
             employee_restauraunt_reviews()
             employee_write_review()
@@ -128,12 +142,16 @@ def SideBarLinks(show_home=False):
 
         if st.session_state["role"] == "owner":
             owner_home_nav()
+            owner_my_restauraunts()
             local_stats()
             global_stats()
             local_reviews()
 
         if st.session_state["role"] == "administrator":
-            reviewer_home_nav()
+            admin_home_nav()
+            admin_users_list()
+            admin_view_complaints()
+            admin_message_user()
 
     # About link appears at the bottom for all roles
     about_page_nav()
