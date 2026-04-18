@@ -4,9 +4,11 @@ import os
 import logging
 
 from backend.db_connection import init_app as init_db
-from backend.simple.simple_routes import simple_routes
-from backend.ngos.ngo_routes import ngos
 
+from backend.reviewer.reviewer_routes import reviewer
+from backend.employee.employee_routes import employee
+from backend.company.company_routes import company
+from backend.admin.admin_routes import admin
 
 def create_app():
     app = Flask(__name__)
@@ -35,7 +37,9 @@ def create_app():
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each.
     app.logger.info("create_app(): registering blueprints")
-    app.register_blueprint(simple_routes)
-    app.register_blueprint(ngos, url_prefix="/ngo")
-
+    app.register_blueprint(reviewer, url_prefix="/api/reviewer")
+    app.register_blueprint(employee, url_prefix="/api/employee")
+    app.register_blueprint(company,  url_prefix="/api/company")
+    app.register_blueprint(admin,    url_prefix="/api/admin")
+    
     return app
