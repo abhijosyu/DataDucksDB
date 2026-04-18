@@ -177,11 +177,7 @@ Jake-4: upload a new photo for a location
 Required JSON body: { "url": "https://..." }
 '''
 @reviewer.route("/locations/<int:location_id>/photos", methods=["POST"])
-def create_location_photo(location_id):
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "Request body must be JSON"}), 400
-    
+def create_location_photo(location_id):    
     cursor = get_db().cursor(dictionary=True)
     try:
         current_app.logger.info(f"POST /locations/{location_id}/photos")
@@ -269,6 +265,10 @@ Required JSON body:
 '''
 @reviewer.route("/reviews", methods=["POST"])
 def create_review():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Request body must be JSON"}), 400
+    
     cursor = get_db().cursor(dictionary=True)
     try:
         current_app.logger.info("POST /reviews")
@@ -319,11 +319,7 @@ Any subset of fields can be updated:
 { "review_text": "updated", "ratings": [...] }
 '''
 @reviewer.route("/reviews/<int:review_id>", methods=["PUT"])
-def update_review(review_id):
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "Request body must be JSON"}), 400
-    
+def update_review(review_id):    
     cursor = get_db().cursor(dictionary=True)
     try:
         current_app.logger.info(f"PUT /reviews/{review_id}")
