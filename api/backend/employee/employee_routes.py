@@ -8,7 +8,6 @@ employee = Blueprint("employee", __name__)
 GET /employee-reviews
 Victoria-1, Joe-4: see employee reviews across the platform,
 optionally filtered by category (e.g., "Work Environment")
-Based on Phase 2 query 3.1
 
 Optional query params: category  (category name as string)
 Example: /employee-reviews?category=Work%20Environment
@@ -59,7 +58,6 @@ def get_all_employee_reviews():
 '''
 POST /employee-reviews
 Victoria-5: submit a new employee review with category ratings
-Based on Phase 2 query 3.5
 
 Required JSON body:
 {
@@ -210,7 +208,6 @@ def get_location_employee_reviews(location_id):
 '''
 POST /complaints
 Victoria-6: file a complaint when HR / internal channels fail
-Based on Phase 2 query 3.6
 
 Required JSON body:
 {
