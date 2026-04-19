@@ -188,3 +188,85 @@ def get_overall_rating(location_id):
 
     except Error as e:
         return jsonify({"error": str(e)}), 500
+
+
+@company.route("/<int:company_id>/analytics", methods=["GET"])
+def get_company_analytics(company_id):
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT 
+                combined.category AS category,
+                ROUND(AVG(combined.score), 2) AS avg_rating
+            FROM (
+                SELECT 
+                    c.name AS category,
+                    r.score AS score
+                FROM Rating r
+                JOIN Category c
+                    ON r.category_id = c.category_id
+                JOIN CustomerReview cr
+                    ON r.review_id = cr.review_id
+                JOIN RestaurantLocation rl
+                    ON cr.location_id = rl.location_id
+                WHERE rl.company_id = %s
+
+                UNION ALL
+
+                SELECT 
+                    c.name AS category,
+                    er.score AS score
+                FROM EmployeeRating er
+                JOIN Category c
+                    ON er.category_id = c.category_id
+                JOIN EmployeeReview ev
+                    ON er.emp_review_id = ev.emp_review_id
+                JOIN RestaurantLocation rl
+                    ON ev.location_id = rl.location_id
+                WHERE rl.company_id = %s
+            ) AS combined
+            GROUP BY combined.category
+            ORDER BY combined.category
+        """, (company_id, company_id))
+
+        return jsonify(cursor.fetchall()), 200
+
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@company.route("/<int:company_id>/overall-rating", methods=["GET"])
+def get_company_overall_rating(company_id):
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT ROUND(AVG(combined.score), 2) AS overall_rating
+            FROM (
+                SELECT r.score AS score
+                FROM Rating r
+                JOIN CustomerReview cr
+                    ON r.review_id = cr.review_id
+                JOIN RestaurantLocation rl
+                    ON cr.location_id = rl.location_id
+                WHERE rl.company_id = %s
+
+                UNION ALL
+
+                SELECT er.score AS score
+                FROM EmployeeRating er
+                JOIN EmployeeReview ev
+                    ON er.emp_review_id = ev.emp_review_id
+                JOIN RestaurantLocation rl
+                    ON ev.location_id = rl.location_id
+                WHERE rl.company_id = %s
+            ) AS combined
+        """, (company_id, company_id))
+
+        return jsonify(cursor.fetchone()), 200
+
+    except Error as e:
+        return jsonify({"error": str(e)}), 500

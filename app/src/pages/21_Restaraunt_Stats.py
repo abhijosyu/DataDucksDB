@@ -20,9 +20,7 @@ company_id = 7  # replace later with logged-in owner's company id
 API_BASE_COMPANY = "http://127.0.0.1:4000/api/company"
 
 
-# -----------------------------
-# API helpers
-# -----------------------------
+
 def get_company_locations(company_id):
     try:
         response = requests.get(f"{API_BASE_COMPANY}/{company_id}/locations", timeout=5)
@@ -62,10 +60,6 @@ def get_location_by_id(locations, location_id):
             return loc
     return None
 
-
-# -----------------------------
-# Load locations
-# -----------------------------
 locations = get_company_locations(company_id)
 
 if not locations:
@@ -82,9 +76,7 @@ if saved_location_id is not None:
         st.warning("Saved location was not found. Please choose a location again.")
         st.session_state["owner_select_location_analytics"] = None
 
-# -----------------------------
-# Choose location
-# -----------------------------
+
 if st.session_state["owner_select_location_analytics"] is None:
     selected_location = st.selectbox(
         "Choose a restaurant location",
@@ -98,17 +90,12 @@ else:
         f'Selected Location: {selected_location.get("city", "")}'
     )
 
-# -----------------------------
-# Fetch analytics
-# -----------------------------
 overall_rating_data = get_overall_rating(location_id)
 analytics_data = get_location_analytics(location_id)
 
 overall_rating = overall_rating_data.get("overall_rating")
 
-# -----------------------------
-# Top metrics
-# -----------------------------
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -122,9 +109,7 @@ with col2:
 
 st.divider()
 
-# -----------------------------
-# Category analytics
-# -----------------------------
+
 st.subheader("Category Ratings")
 
 if not analytics_data:
