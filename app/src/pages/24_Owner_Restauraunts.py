@@ -12,6 +12,8 @@ st.set_page_config(layout='wide')
 SideBarLinks()
 
 # set up the page
+st.session_state.pop('owner_select_location', None)
+st.session_state.pop('owner_select_location_reviews', None)
 
 
 API_BASE = "http://127.0.0.1:4000/api/company"
@@ -34,17 +36,9 @@ locations = get_company_locations(company_id)
 name = get_company_name(company_id)
 st.markdown(f'# {name["name"]} Restauraunts List')
 for loc in locations:
-        st.markdown(loc)
-
         col1, col2 = st.columns([4, 1])
 
         with col1:
-            st.caption(f"{loc['address']}, {loc['city']}")
-
-        with col2:
-            
-            if st.button("View", key=f"view_{loc}"):
-                st.session_state["selected_location"] = loc
-                st.switch_page("pages/21_Restaraunt_Stats.py")
+            st.markdown(f"### {loc['address']}, {loc['city']}")
 
         st.divider()

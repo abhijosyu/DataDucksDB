@@ -135,16 +135,34 @@ def get_location_analytics(location_id):
     try:
         cursor.execute("""
             SELECT 
-                c.name AS category,
-                ROUND(AVG(r.score), 2) AS avg_rating
-            FROM Rating r
-            JOIN Category c 
-                ON r.category_id = c.category_id
-            JOIN CustomerReview cr 
-                ON r.review_id = cr.review_id
-            WHERE cr.location_id = %s
-            GROUP BY c.name
-        """, (location_id,))
+                combined.category AS category,
+                ROUND(AVG(combined.score), 2) AS avg_rating
+            FROM (
+                SELECT 
+                    c.name AS category,
+                    r.score AS score
+                FROM Rating r
+                JOIN Category c
+                    ON r.category_id = c.category_id
+                JOIN CustomerReview cr
+                    ON r.review_id = cr.review_id
+                WHERE cr.location_id = %s
+
+                UNION ALL
+
+                SELECT 
+                    c.name AS category,
+                    er.score AS score
+                FROM EmployeeRating er
+                JOIN Category c
+                    ON er.category_id = c.category_id
+                JOIN EmployeeReview ev
+                    ON er.emp_review_id = ev.emp_review_id
+                WHERE ev.location_id = %s
+            ) AS combined
+            GROUP BY combined.category
+            ORDER BY combined.category
+        """, (location_id, location_id))
 
         return jsonify(cursor.fetchall()), 200
 
