@@ -15,6 +15,8 @@ SideBarLinks()
 
 # set up the page
 st.markdown("# Restaurant Reviews")
+st.session_state.pop('review_id', None)
+st.session_state.pop('location_id', None)
 
 API_BASE = "http://127.0.0.1:4000/api/reviewer"
 
@@ -55,6 +57,8 @@ if "selected_location" not in st.session_state:
 else:
     loc = st.session_state["selected_location"]
 
+st.session_state.pop('selected_location', None)
+
 st.markdown(
     f"<h1 style='text-align: center;'>{loc['restaurant_name']}</h2>",
     unsafe_allow_html=True
@@ -75,7 +79,7 @@ with col1:
 with col2:
     rating = loc["avg_rating"] if loc["avg_rating"] is not None else "No ratings yet"
     st.markdown(
-    f"<h5 style='text-align: center;'> price range: {rating}</h5>",
+    f"<h5 style='text-align: center;'> average rating: {rating}</h5>",
     unsafe_allow_html=True
     )
 
@@ -91,10 +95,22 @@ else:
         review_text = review["review_text"]
         review_date = review["review_date"]
         avg_score = review["avg_score"] if review["avg_score"] is not None else "N/A"
+        
+       
 
         with st.container():
             st.markdown(f"### {reviewer_name}")
-            st.write(f"**Date:** {review_date}")
-            st.write(f"**Average Score:** {avg_score}")
-            st.write(review_text)
+            st.write(f"{review_date}")
+            col3, col4 = st.columns([3, 1])
+            with col3:
+                st.write(review_text)
+
+            with col4:
+                st.write(f"**Average Score:** {avg_score}")
+                reviewer_id = review["user_id"]
+                if reviewer_id == 1:
+                    if st.button("Edit", key=f"edit_{review["review_id"]}"):
+                        st.session_state["review_id"] = f'{review["review_id"]}'
+                        st.session_state["location_id"] = f'{loc['location_id']}'
+                        st.switch_page("pages/03_Reviewer_Write.py")                
             st.divider()

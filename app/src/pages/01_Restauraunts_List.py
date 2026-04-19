@@ -15,6 +15,9 @@ st.set_page_config(layout='wide')
 SideBarLinks()
 
 st.markdown('# List Of Restaurants')
+st.session_state.pop('selected_location', None)
+st.session_state.pop('review_id', None)
+st.session_state.pop('location_id', None)
 
 API_BASE = "http://127.0.0.1:4000/api/reviewer"
 
