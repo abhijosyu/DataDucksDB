@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS CustomerReview;
 CREATE TABLE CustomerReview (
                                 review_id INT AUTO_INCREMENT PRIMARY KEY,
                                 user_id INT, location_id INT, review_text TEXT,
-                                review_date DATE, FOREIGN KEY (user_id) REFERENCES User(user_id),
+                                review_date DATETIME, FOREIGN KEY (user_id) REFERENCES User(user_id),
                                 FOREIGN KEY (location_id) REFERENCES RestaurantLocation(location_id)
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE EmployeeReview (
                                 user_id INT,
                                 location_id INT,
                                 review_text TEXT,
-                                review_date DATE,
+                                review_date DATETIME,
                                 FOREIGN KEY (user_id) REFERENCES User(user_id),
                                 FOREIGN KEY (location_id) REFERENCES RestaurantLocation(location_id)
 );
