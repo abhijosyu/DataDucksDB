@@ -2,7 +2,7 @@ USE DiningDucks;
 
 -- USER
 
-INSERT INTO User(name, email, role) VALUES ('Georgeanna Want','gwant0@reference.com','employee');
+INSERT INTO User(name, email, role) VALUES ('Jake Want','jake@reference.com','employee');
 INSERT INTO User(name, email, role) VALUES ('Elianora Overlow','eoverlow1@bravesites.com','company');
 INSERT INTO User(name, email, role) VALUES ('Bink Reams','breams2@wiley.com','employee');
 INSERT INTO User(name, email, role) VALUES ('Gerladina Marrian','gmarrian3@fotki.com','employee');
@@ -164,7 +164,7 @@ INSERT INTO RestaurantLocation(company_id,address,city,price_range) VALUES (17,'
 INSERT INTO Category(name) VALUES ('pay');
 INSERT INTO Category(name) VALUES ('management');
 INSERT INTO Category(name) VALUES ('work-life balance');
-INSERT INTO Category(name) VALUES ('oveall');
+INSERT INTO Category(name) VALUES ('overall');
 INSERT INTO Category(name) VALUES ('food');
 INSERT INTO Category(name) VALUES ('$$$');
 INSERT INTO Category(name) VALUES ('service');
