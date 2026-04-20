@@ -27,9 +27,9 @@ if "show_employee_reviews" not in st.session_state:
 
 company_id = 7  # replace with logged-in owner's company id later
 
-API_BASE_COMPANY = "http://127.0.0.1:4000/api/company"
-API_BASE_REVIEWER = "http://127.0.0.1:4000/api/reviewer"
-API_BASE_EMPLOYEE = "http://127.0.0.1:4000/api/employee"
+API_BASE_COMPANY = "http://web-api:4000/api/company"
+API_BASE_REVIEWER = "http://web-api:4000/api/reviewer"
+API_BASE_EMPLOYEE = "http://web-api:4000/api/employee"
 
 
 # ----------------------------

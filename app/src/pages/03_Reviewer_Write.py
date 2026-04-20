@@ -20,7 +20,7 @@ if "review_id" not in st.session_state:
 if "location_id" not in st.session_state:
     st.session_state["location_id"] = None
 
-API_BASE = "http://127.0.0.1:4000/api/reviewer"
+API_BASE = "http://web-api:4000/api/reviewer"
 
 
 def get_locations():

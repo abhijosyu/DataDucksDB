@@ -4,6 +4,18 @@ from mysql.connector import Error
 
 admin = Blueprint("admin", __name__)
 
+@admin.route("/users", methods=["GET"])
+def get_users():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    try:
+        cursor.execute("SELECT * FROM User")   
+        return jsonify(cursor.fetchall()), 200
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
+
 @admin.route("/companies", methods=["GET"])
 def get_companies():
     db = get_db()
@@ -107,7 +119,18 @@ def get_complaints():
     cursor = db.cursor(dictionary=True)
 
     try:
-        cursor.execute("SELECT * FROM Complaint")
+        cursor.execute("""
+                            SELECT 
+                                c.complaint_id,
+                                c.description,
+                                c.status,
+                                u.user_id,
+                                u.name,
+                                u.email,
+                                u.role
+                            FROM Complaint c
+                            JOIN User u ON c.user_id = u.user_id
+                       """)
         return jsonify(cursor.fetchall()), 200
     except Error as e:
         return jsonify({"error": str(e)}), 500

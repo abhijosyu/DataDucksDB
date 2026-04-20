@@ -17,7 +17,7 @@ if "owner_select_location_analytics" not in st.session_state:
 
 company_id = 7  # replace later with logged-in owner's company id
 
-API_BASE_COMPANY = "http://127.0.0.1:4000/api/company"
+API_BASE_COMPANY = "http://web-api:4000/api/company"
 
 
 

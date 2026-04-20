@@ -16,7 +16,7 @@ st.session_state.pop('owner_select_location', None)
 st.session_state.pop('owner_select_location_reviews', None)
 
 
-API_BASE = "http://127.0.0.1:4000/api/company"
+API_BASE = "http://web-api:4000/api/company"
 
 
 company_id = 7  

@@ -18,7 +18,7 @@ st.markdown("# Restaurant Reviews")
 st.session_state.pop('review_id', None)
 st.session_state.pop('location_id', None)
 
-API_BASE = "http://127.0.0.1:4000/api/reviewer"
+API_BASE = "http://web-api:4000/api/reviewer"
 
 def get_locations():
     try:
@@ -109,8 +109,8 @@ else:
                 st.write(f"**Average Score:** {avg_score}")
                 reviewer_id = review["user_id"]
                 if reviewer_id == 1:
-                    if st.button("Edit", key=f"edit_{review["review_id"]}"):
+                    if st.button("Edit", key=f"edit_{review['review_id']}"):
                         st.session_state["review_id"] = f'{review["review_id"]}'
-                        st.session_state["location_id"] = f'{loc['location_id']}'
+                        st.session_state["location_id"] = f'{loc["location_id"]}'
                         st.switch_page("pages/03_Reviewer_Write.py")                
             st.divider()

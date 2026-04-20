@@ -14,7 +14,7 @@ SideBarLinks()
 # set up the page
 st.markdown("# Company Metrics")
 
-API_BASE_COMPANY = "http://127.0.0.1:4000/api/company"
+API_BASE_COMPANY = "http://web-api:4000/api/company"
 
 company_id = 7
 
