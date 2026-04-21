@@ -18,10 +18,10 @@ Dining Ducks is a data-driven restaurant review & analytics platform which conne
 
 - **Employee**
   - Provides behind-the-scenes reviews
-    - Rates categories such as:
-      - Pay
-      - Management
-      - Work-Life Balance
+  - Rates categories such as:
+    - Pay
+    - Management
+    - Work-Life Balance
   - Shares insights about workplace conditions
 
 - **Company (Restaurant Owners / Managers)**
@@ -36,23 +36,23 @@ Dining Ducks is a data-driven restaurant review & analytics platform which conne
 - Containerization: Docker
 
 ## Project Structure
-- './app'              - streamlit frontend
-- './api'              - Flask API (Blueprints & routes)
-- './database-files/'  - SQL schema + mock data
+- `./app`              - streamlit frontend
+- `./api`              - Flask API (Blueprints & routes)
+- `./database-files/`  - SQL schema + mock data
 - docker-compose.yml   - Container setup
 - README.md
 
 ## How to Run the Project
 1. Clone the Repository
-'''bash
+```bash
 git clone https://github.com/abhijosyu/DataDucksDB.git
 cd <repo-name>
-'''
-2. Create '.env' file
+```
+2. Create `.env` file
 3. Run Docker Containers
-'''bash
+```bash
 docker compose up -d
-'''
+```
 4. Access the App
 - Streamlit UI: http://localhost:8501
 - API server: http://localhost:4000
@@ -60,10 +60,10 @@ docker compose up -d
 ## REST API Overview
 - The API is organized using Flask Blueprints by role or resources.
 Examples:
-  - 'GET/reviews' --> fetch reviews
-  - 'POST/reviews' --> create review
-  - 'PUT/reviews/{id}' --> update review
-  - 'DELETE/reviews/{id}' --> fetch review
+  - `GET/reviews` --> fetch reviews
+  - `POST/reviews` --> create review
+  - `PUT/reviews/{id}` --> update review
+  - `DELETE/reviews/{id}` --> fetch review
 
 
 ## Database
