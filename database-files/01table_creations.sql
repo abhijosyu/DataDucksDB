@@ -57,7 +57,7 @@ CREATE TABLE Rating (
                         rating_id INT AUTO_INCREMENT PRIMARY KEY,
                         review_id INT, category_id INT,
                         score INT CHECK (score BETWEEN 1 AND 5),
-                        FOREIGN KEY (review_id) REFERENCES CustomerReview(review_id),
+                        FOREIGN KEY (review_id) REFERENCES CustomerReview(review_id) ON DELETE CASCADE,
                         FOREIGN KEY (category_id) REFERENCES Category(category_id)
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE EmployeeRating (
                                 emp_review_id INT,
                                 category_id INT,
                                 score INT CHECK (score BETWEEN 1 AND 5),
-                                FOREIGN KEY (emp_review_id) REFERENCES EmployeeReview(emp_review_id),
+                                FOREIGN KEY (emp_review_id) REFERENCES EmployeeReview(emp_review_id) ON DELETE CASCADE,
                                 FOREIGN KEY (category_id) REFERENCES Category(category_id)
 );
 
@@ -114,7 +114,7 @@ CREATE TABLE Flag (
                       flag_id INT AUTO_INCREMENT PRIMARY KEY,
                       admin_id INT, review_id INT, reason TEXT,
                       FOREIGN KEY (admin_id) REFERENCES User(user_id),
-                      FOREIGN KEY (review_id) REFERENCES CustomerReview(review_id)
+                      FOREIGN KEY (review_id) REFERENCES CustomerReview(review_id) ON DELETE CASCADE
 );
 
 

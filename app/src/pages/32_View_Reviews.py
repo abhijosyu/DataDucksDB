@@ -35,8 +35,14 @@ def delete_customer_review(review_id):
         response.raise_for_status()
         return True
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error deleting customer review {review_id}: {e}")
-        st.error(f"Could not delete customer review #{review_id}.")
+        #logger.error(f"Error deleting customer review {review_id}: {e}")
+        #st.error(f"Could not delete customer review #{review_id}.")
+
+        if e.response is not None:
+            st.error(f"Could not delete customer review #{review_id}: {e.response.text}")
+        else:
+            st.error(f"Could not delete customer review #{review_id}.")
+        
         return False
 
 

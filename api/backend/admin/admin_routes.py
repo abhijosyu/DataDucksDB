@@ -175,6 +175,45 @@ def delete_flag(flag_id):
     except Error as e:
         return jsonify({"error": str(e)}), 500
     
+@admin.route("/customer_reviews/<int:review_id>", methods=["DELETE"])
+def delete_customer_review(review_id):
+    db = get_db()
+    cursor = db.cursor()
+
+    try:
+        cursor.execute(
+            "DELETE FROM CustomerReview WHERE review_id = %s",
+            (review_id,)
+        )
+        db.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Customer review not found"}), 404
+
+        return jsonify({"message": "Customer review deleted successfully"}), 200
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@admin.route("/employee_reviews/<int:review_id>", methods=["DELETE"])
+def delete_employee_review(review_id):
+    db = get_db()
+    cursor = db.cursor()
+
+    try:
+        cursor.execute(
+            "DELETE FROM EmployeeReview WHERE emp_review_id = %s",
+            (review_id,)
+        )
+        db.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Employee review not found"}), 404
+
+        return jsonify({"message": "Employee review deleted successfully"}), 200
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
 
 @admin.route("/complaints", methods=["GET"])
 def get_complaints():
