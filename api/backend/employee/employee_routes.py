@@ -4,6 +4,51 @@ from mysql.connector import Error
  
 employee = Blueprint("employee", __name__)
 
+@employee.route("/locations", methods=["GET"])
+def get_locations():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT
+                rl.location_id,
+                c.name AS restaurant_name,
+                rl.address,
+                rl.city,
+                rl.price_range,
+
+                ROUND(AVG(CASE WHEN cat.name = 'Pay' THEN erating.score END), 1) AS avg_pay,
+                ROUND(AVG(CASE WHEN cat.name = 'Management' THEN erating.score END), 1) AS avg_management,
+                ROUND(AVG(CASE WHEN cat.name = 'Work-Life Balance' THEN erating.score END), 1) AS avg_work_life_balance
+
+            FROM RestaurantLocation rl
+            JOIN Company c
+                ON rl.company_id = c.company_id
+
+            LEFT JOIN EmployeeReview er
+                ON rl.location_id = er.location_id
+
+            LEFT JOIN EmployeeRating erating
+                ON er.emp_review_id = erating.emp_review_id
+
+            LEFT JOIN Category cat
+                ON erating.category_id = cat.category_id
+
+            GROUP BY
+                rl.location_id,
+                c.name,
+                rl.address,
+                rl.city,
+                rl.price_range
+
+            ORDER BY c.name, rl.city
+        """)
+        return jsonify(cursor.fetchall()), 200
+
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+
 '''
 GET /employee-reviews
 Victoria-1, Joe-4: see employee reviews across the platform,

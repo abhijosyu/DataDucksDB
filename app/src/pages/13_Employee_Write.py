@@ -84,7 +84,7 @@ if st.session_state["emp_review_id"] != None and st.session_state["location_id"]
         })
         payload = {
             "location_id": location_id,
-            "user_id": 1,
+            "user_id": st.session_state["user_id"],
             "review_text": "",
             "ratings": ratings
         }
@@ -139,8 +139,7 @@ else:
             1, 5, 3,
             key=f"3"
         )
-
-
+    
     if st.button("Submit Review"):
         ratings.append({
             "category_id": 1,
@@ -156,7 +155,7 @@ else:
         })
         payload = {
             "location_id": selected_location["location_id"],
-            "user_id": 1,
+            "user_id": st.session_state["user_id"],
             "review_text": review_text,
             "ratings": ratings
         }

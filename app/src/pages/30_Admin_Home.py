@@ -15,14 +15,19 @@ st.write('### What would you like to do today?')
 if st.button('Users List',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/33_Users_List.py')
+    st.switch_page('pages/31_Users_List.py')
+
+if st.button('View Reviews',
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/32_View_Reviews.py')
 
 if st.button('View Complaints',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/32_View_Complaints.py')
+    st.switch_page('pages/33_View_Complaints.py')
 
 if st.button('Message User',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/31_Message_User.py')
+    st.switch_page('pages/34_Message_User.py')

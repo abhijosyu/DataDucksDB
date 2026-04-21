@@ -40,30 +40,52 @@ def delete_company(company_id):
     except Error as e:
         return jsonify({"error": str(e)}), 500
 
-@admin.route("/reviews", methods=["GET"])
-def get_reviews():
+@admin.route("/all_reviews", methods=["GET"])
+def get_all_reviews():
     db = get_db()
     cursor = db.cursor(dictionary=True)
 
     try:
-        cursor.execute("SELECT * FROM CustomerReview")
+        cursor.execute("""
+            SELECT
+                cr.review_id,
+                cr.user_id,
+                cr.location_id,
+                cr.review_text,
+                cr.review_date,
+                u.name,
+                u.email,
+                c.name AS restaurant_name,
+                rl.address,
+                rl.city,
+                'customer' AS review_type
+            FROM CustomerReview cr
+            JOIN User u ON cr.user_id = u.user_id
+            LEFT JOIN RestaurantLocation rl ON cr.location_id = rl.location_id
+            LEFT JOIN Company c ON rl.company_id = c.company_id
+
+            UNION ALL
+
+            SELECT
+                er.emp_review_id,
+                er.user_id,
+                er.location_id,
+                er.review_text,
+                er.review_date,
+                u.name,
+                u.email,
+                c.name AS restaurant_name,
+                rl.address,
+                rl.city,
+                'employee' AS review_type
+            FROM EmployeeReview er
+            JOIN User u ON er.user_id = u.user_id
+            LEFT JOIN RestaurantLocation rl ON er.location_id = rl.location_id
+            LEFT JOIN Company c ON rl.company_id = c.company_id
+
+            ORDER BY review_date ASC
+        """)
         return jsonify(cursor.fetchall()), 200
-    except Error as e:
-        return jsonify({"error": str(e)}), 500
-
-
-@admin.route("/reviews/<int:review_id>", methods=["DELETE"])
-def delete_review(review_id):
-    db = get_db()
-    cursor = db.cursor()
-
-    try:
-        cursor.execute(
-            "DELETE FROM CustomerReview WHERE review_id = %s",
-            (review_id,)
-        )
-        db.commit()
-        return jsonify({"message": "Review deleted"}), 200
     except Error as e:
         return jsonify({"error": str(e)}), 500
 
@@ -149,5 +171,25 @@ def update_complaint_status(complaint_id):
         )
         db.commit()
         return jsonify({"message": "Complaint updated"}), 200
+    except Error as e:
+        return jsonify({"error": str(e)}), 500
+    
+@admin.route('/complaints/<int:complaint_id>', methods=['DELETE'])
+def delete_complaint(complaint_id):
+    db = get_db()
+    cursor = db.cursor()
+
+    try:
+        cursor.execute("""
+            DELETE FROM Complaint
+            WHERE complaint_id = %s
+        """, (complaint_id,))
+        db.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Complaint not found"}), 404
+
+        return jsonify({"message": "Complaint deleted successfully"}), 200
+
     except Error as e:
         return jsonify({"error": str(e)}), 500

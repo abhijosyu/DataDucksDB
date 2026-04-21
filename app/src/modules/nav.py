@@ -48,20 +48,25 @@ def employee_home_nav():
         "pages/10_Employee_Home.py", label="Employee Home", icon="🏠"
     )
 
+def employee_restaurant_list():
+    st.sidebar.page_link(
+        "pages/11_Employee_Restaurant_List.py", label="Restauraunts List", icon="📋"
+    )
+
 def employee_restauraunt_reviews():
     st.sidebar.page_link(
-        "pages/11_Employee_Restaurant_Reviews.py", label="Employee Reviews", icon="⭐️"
+        "pages/12_Employee_Restaurant_Reviews.py", label="Employee Reviews", icon="⭐️"
     )
 
 
 def employee_write_review():
     st.sidebar.page_link(
-        "pages/12_Employee_Write.py", label="Write Review", icon="✏️"
+        "pages/13_Employee_Write.py", label="Write Review", icon="✏️"
     )
 
 
 def employee_write_complaint():
-    st.sidebar.page_link("pages/13_Employee_Complaint.py", label="Write a Complaint", icon="⚠️")
+    st.sidebar.page_link("pages/14_Employee_Complaint.py", label="Write a Complaint", icon="⚠️")
 
 # ---- Role: company owner ----------------------------------------------------
 
@@ -95,14 +100,16 @@ def admin_home_nav():
     st.sidebar.page_link("pages/30_Admin_Home.py", label="Admin Home", icon="🏠")
 
 def admin_users_list():
-    st.sidebar.page_link("pages/33_Users_List.py", label="Users List", icon="👤")
+    st.sidebar.page_link("pages/31_Users_List.py", label="Users List", icon="👤")
+
+def admin_view_reviews():
+    st.sidebar.page_link("pages/32_View_Reviews.py", label="View Reviews", icon="⭐️")
 
 def admin_view_complaints():
-    st.sidebar.page_link("pages/32_View_Complaints.py", label="View Complaints", icon="⚠️")
+    st.sidebar.page_link("pages/33_View_Complaints.py", label="View Complaints", icon="⚠️")
 
 def admin_message_user():
-    st.sidebar.page_link("pages/31_Message_User.py", label="Message User", icon="🧑‍💻")
-
+    st.sidebar.page_link("pages/34_Message_User.py", label="Message User", icon="🧑‍💻")
 
 
 
@@ -135,7 +142,7 @@ def SideBarLinks(show_home=False):
 
         if st.session_state["role"] == "employee":
             employee_home_nav()
-            reviewer_restaurant_list()
+            employee_restaurant_list()
             employee_restauraunt_reviews()
             employee_write_review()
             employee_write_complaint()
@@ -150,6 +157,7 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "administrator":
             admin_home_nav()
             admin_users_list()
+            admin_view_reviews()
             admin_view_complaints()
             admin_message_user()
 

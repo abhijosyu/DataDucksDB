@@ -52,6 +52,7 @@ if st.button("👨 act as Jake, a restaurant reviewer",
     st.session_state['first_name'] = 'Jake'
     # finally, we ask streamlit to switch to another page, in this case, the
     # landing page for this particular user type
+    st.session_state['user_id'] = 1 # Set user_id for Jake
     logger.info("Logging in as Restaurant Reviewer Persona")
     st.switch_page('pages/00_Reviewer_Home.py')
 
@@ -61,6 +62,8 @@ if st.button('👩‍🍳 Act as Victoria Hu, a restaurant employee',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'employee' 
     st.session_state['first_name'] = 'Victoria'
+    st.session_state['user_id'] = 2 # Set user_id for Victoria
+    logger.info("Logging in as Restaurant Employee Persona")
     st.switch_page('pages/10_Employee_Home.py')
 
 if st.button('👔 Act as Joe, a restaurant owner',
@@ -69,6 +72,8 @@ if st.button('👔 Act as Joe, a restaurant owner',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'owner' 
     st.session_state['first_name'] = 'Joe'
+    st.session_state['user_id'] = 3 # Set user_id for Joe
+    logger.info("Logging in as Restaurant Owner Persona")
     st.switch_page('pages/20_Owner_Home.py')
 
 if st.button('👨‍💻 Act as Alex, a System Administrator',
@@ -77,4 +82,6 @@ if st.button('👨‍💻 Act as Alex, a System Administrator',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'Alex'
+    st.session_state['user_id'] = 4 # Set user_id for Alex
+    logger.info("Logging in as System Administrator Persona")
     st.switch_page('pages/30_Admin_Home.py')

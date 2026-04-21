@@ -91,8 +91,8 @@ else:
                 st.write(f"**Average Score:** {avg_score}")
                 reviewer_id = review["user_id"]
                 if reviewer_id == 1:
-                    if st.button("Edit", key=f"edit_{review['review_id']}"):
-                        st.session_state["review_id"] = f'{review["review_id"]}'
+                    if st.button("Edit", key=f"edit_{review['emp_review_id']}"):
+                        st.session_state["emp_review_id"] = f'{review["emp_review_id"]}'
                         st.session_state["location_id"] = f'{loc["location_id"]}'
                         st.switch_page("pages/12_Employee_Write.py")                
             st.divider()

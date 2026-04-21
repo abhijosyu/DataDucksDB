@@ -26,6 +26,16 @@ def get_complaints():
         logger.error(f"Error fetching complaints: {e}")
         st.error("Could not load complaints.")
         return []
+    
+def delete_complaint(complaint_id):
+    try:
+        response = requests.delete(f"{API_BASE}/complaints/{complaint_id}")
+        response.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error deleting complaint {complaint_id}: {e}")
+        st.error(f"Could not delete complaint #{complaint_id}.")
+        return False
 
 complaints = get_complaints()
 
@@ -49,6 +59,11 @@ else:
 
         with col2:
             st.write(f"**Status:** {status}")
+
+            if st.button("Delete", key=f"delete_{complaint_id}"):
+                if delete_complaint(complaint_id):
+                    st.success(f"Complaint #{complaint_id} deleted.")
+                    st.rerun()
 
         st.divider()
 
