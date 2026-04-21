@@ -100,7 +100,7 @@ else:
 cols = st.columns(2)
 with cols[0]:
     if st.button("✍️ Write an Employee Review", use_container_width=True, type="primary"):
-        st.switch_page("pages/12_Employee_Write.py")
+        st.switch_page("pages/13_Employee_Write.py")
 with cols[1]:
     if st.button("📢 Submit a Complaint", use_container_width=True):
-        st.switch_page("pages/13_Employee_Complaint.py")
+        st.switch_page("pages/14_Employee_Complaint.py")

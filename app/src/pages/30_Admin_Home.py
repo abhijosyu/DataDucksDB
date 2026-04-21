@@ -27,7 +27,7 @@ if st.button('View Complaints',
              use_container_width=True):
     st.switch_page('pages/33_View_Complaints.py')
 
-if st.button('Message User',
+if st.button('View Flagged Reviews',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/34_Message_User.py')
+    st.switch_page('pages/34_Flagged_Reviews.py')

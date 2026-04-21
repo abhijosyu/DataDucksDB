@@ -50,6 +50,22 @@ def delete_employee_review(review_id):
         st.error(f"Could not delete employee review #{review_id}.")
         return False
 
+def create_flag(review_id, reason):
+    payload = {
+        "admin_id": st.session_state["user_id"],
+        "review_id": review_id,
+        "reason": reason
+    }
+
+    try:
+        response = requests.post(f"{API_BASE}/flags", json=payload)
+        response.raise_for_status()
+        return True
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error flagging review {review_id}: {e}")
+        st.error(f"Could not flag review #{review_id}.")
+        return False
+
 
 reviews = get_all_reviews()
 
@@ -101,6 +117,12 @@ else:
             st.markdown(f"**Date:** :blue[{formatted_date}]")
             st.write(f"**Review:** {review_text}")
 
+            reason = st.text_input(
+                "Flag reason",
+                key=f"flag_reason_{review_type}_{review_id}",
+                placeholder="Enter reason for flagging this review"
+        )
+
         with col2:
             st.write(f"**Type:** {review_type.capitalize()}")
 
@@ -114,6 +136,16 @@ else:
                 if st.button("Delete", key=f"delete_employee_{review_id}"):
                     if delete_employee_review(review_id):
                         st.success(f"Employee review #{review_id} deleted.")
+                        st.rerun()
+                        
+            if st.button("Flag", key=f"flag_{review_type}_{review_id}"):
+                if not review_id:
+                    st.error("This review does not have a valid review_id.")
+                elif not reason.strip():
+                    st.warning("Please enter a reason before flagging.")
+                else:
+                    if create_flag(review_id, reason.strip()):
+                        st.success(f"Review #{review_id} flagged successfully.")
                         st.rerun()
 
         st.divider()

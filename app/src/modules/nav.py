@@ -108,8 +108,8 @@ def admin_view_reviews():
 def admin_view_complaints():
     st.sidebar.page_link("pages/33_View_Complaints.py", label="View Complaints", icon="⚠️")
 
-def admin_message_user():
-    st.sidebar.page_link("pages/34_Message_User.py", label="Message User", icon="🧑‍💻")
+def admin_flagged_reviews():
+    st.sidebar.page_link("pages/34_Flagged_Reviews.py", label="Flagged Reviews", icon="🚨")
 
 
 
@@ -159,7 +159,7 @@ def SideBarLinks(show_home=False):
             admin_users_list()
             admin_view_reviews()
             admin_view_complaints()
-            admin_message_user()
+            admin_flagged_reviews()
 
     # About link appears at the bottom for all roles
     about_page_nav()

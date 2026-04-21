@@ -113,7 +113,55 @@ def get_flags():
     cursor = db.cursor(dictionary=True)
 
     try:
-        cursor.execute("SELECT * FROM Flag")
+        cursor.execute("""SELECT
+                f.flag_id,
+                f.admin_id,
+                f.review_id,
+                f.reason,
+                admin_user.name AS flagged_by_name,
+
+                cr.review_text,
+                cr.review_date,
+                reviewer_user.name AS reviewer_name,
+                reviewer_user.email AS reviewer_email,
+                c.name AS restaurant_name,
+                rl.address,
+                rl.city,
+                'customer' AS review_type
+
+            FROM Flag f
+            JOIN User admin_user ON f.admin_id = admin_user.user_id
+            JOIN CustomerReview cr ON f.review_id = cr.review_id
+            JOIN User reviewer_user ON cr.user_id = reviewer_user.user_id
+            LEFT JOIN RestaurantLocation rl ON cr.location_id = rl.location_id
+            LEFT JOIN Company c ON rl.company_id = c.company_id
+
+            UNION ALL
+
+            SELECT
+                f.flag_id,
+                f.admin_id,
+                f.review_id,
+                f.reason,
+                admin_user.name AS flagged_by_name,
+
+                er.review_text,
+                er.review_date,
+                reviewer_user.name AS reviewer_name,
+                reviewer_user.email AS reviewer_email,
+                c.name AS restaurant_name,
+                rl.address,
+                rl.city,
+                'employee' AS review_type
+
+            FROM Flag f
+            JOIN User admin_user ON f.admin_id = admin_user.user_id
+            JOIN EmployeeReview er ON f.review_id = er.emp_review_id
+            JOIN User reviewer_user ON er.user_id = reviewer_user.user_id
+            LEFT JOIN RestaurantLocation rl ON er.location_id = rl.location_id
+            LEFT JOIN Company c ON rl.company_id = c.company_id
+
+            ORDER BY flag_id DESC""")
         return jsonify(cursor.fetchall()), 200
     except Error as e:
         return jsonify({"error": str(e)}), 500

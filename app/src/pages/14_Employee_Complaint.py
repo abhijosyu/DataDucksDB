@@ -55,13 +55,13 @@ if st.button("Submit Complaint"):
         st.warning("Please write a complaint before submitting.")
     payload = {
         "location_id": selected_location["location_id"],
-        "user_id": 1,
-        "review_text": complaint_text,
+        "user_id": st.session_state["user_id"],
+        "description": complaint_text,
     }
 
     try:
         response = requests.post(
-            f"http://web-api:4000/api/complaints",
+            f"http://web-api:4000/api/employee/complaints",
             json=payload
         )
 
