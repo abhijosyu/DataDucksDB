@@ -31,6 +31,7 @@ def get_locations():
 
 locations = get_locations()
 
+
 def get_location_reviews(location_id):
     try:
         response = requests.get(f"{API_BASE}/locations/{location_id}/reviews")
@@ -56,6 +57,18 @@ if "selected_location" not in st.session_state:
     loc = options[selected_label]
 else:
     loc = st.session_state["selected_location"]
+
+def get_location_photos(location_id):
+    try:
+        response = requests.get(f"{API_BASE}/locations/{location_id}/photos")
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error fetching photos for location {location_id}: {e}")
+        return []
+    
+
+photos = get_location_photos(loc["location_id"])
 
 st.session_state.pop('selected_location', None)
 
@@ -114,3 +127,14 @@ else:
                         st.session_state["location_id"] = f'{loc["location_id"]}'
                         st.switch_page("pages/03_Reviewer_Write.py")                
             st.divider()
+
+st.markdown("## Photos")
+
+if not photos:
+    st.info("No photos yet for this restaurant.")
+else:
+    photo_cols = st.columns(3)
+
+    for i, photo in enumerate(photos):
+        with photo_cols[i % 3]:
+            st.image(photo["url"], use_container_width=True)

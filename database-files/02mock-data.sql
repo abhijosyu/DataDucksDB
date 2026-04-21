@@ -2,7 +2,7 @@ USE DiningDucks;
 
 -- USER
 
-INSERT INTO User(name, email, role) VALUES ('Jake Want','jake@reference.com','employee');
+INSERT INTO User(name, email, role) VALUES ('Jake Want','jake@reference.com','reviewer');
 INSERT INTO User(name, email, role) VALUES ('Victoria Hu','victoria@company.com','employee');
 INSERT INTO User(name, email, role) VALUES ('Joe Kim','joe@company.com','employee');
 INSERT INTO User(name, email, role) VALUES ('Alex Chen','alex@company.com','employee');

@@ -93,7 +93,7 @@ if st.session_state["review_id"] != None and st.session_state["location_id"] != 
         )
 
     service = st.slider(
-            'price',
+            'service',
             1, 3, 2,
             key=f"7"
         )

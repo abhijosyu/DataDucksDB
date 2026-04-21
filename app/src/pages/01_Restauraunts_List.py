@@ -73,6 +73,10 @@ else:
             with col1:
                 st.markdown(f"### {loc['restaurant_name']}")
                 st.caption(f"{loc['address']}, {loc['city']}")
+                tags = loc.get("tags", [])
+                if tags:
+                    tag_text = " ".join([f"`{tag}`" for tag in tags])
+                    st.markdown(tag_text)
 
             with col2:
                 rating = loc["avg_rating"] if loc["avg_rating"] is not None else "N/A"
